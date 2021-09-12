@@ -19,7 +19,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(PicoBase PicoBase.c )
+add_executable(PicoBase main.c )
 
 pico_set_program_name(PicoBase "PicoBase")
 pico_set_program_version(PicoBase "0.1")
