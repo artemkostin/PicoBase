@@ -18,8 +18,12 @@ project(PicoBase C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
+add_executable(PicoBase main.c)
 
-add_executable(PicoBase main.c )
+add_subdirectory(Utils)
+target_include_directories(PicoBase PUBLIC Utils)
+
+
 
 pico_set_program_name(PicoBase "PicoBase")
 pico_set_program_version(PicoBase "0.1")

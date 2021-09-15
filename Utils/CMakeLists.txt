@@ -1,0 +1,2 @@
+add_subdirectory(Heartbeat)
+target_include_directories(PicoBase PUBLIC Heartbeat)
