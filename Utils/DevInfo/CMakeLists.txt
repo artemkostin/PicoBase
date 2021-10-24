@@ -1,0 +1,1 @@
+target_sources(PicoBase PUBLIC devinfo.c)
