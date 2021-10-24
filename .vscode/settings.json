@@ -12,5 +12,16 @@
     "buildTarget" : {
       "visibility": "hidden"
                },
-     },
+    },
+    "files.associations": {
+      "cli.h": "c",
+      "cstdio": "c",
+      "stdint.h": "c",
+      "stdlib.h": "c",
+      "stdio_usb.h": "c",
+      "stdio.h": "c",
+      "string.h": "c",
+      "printf.h": "c",
+      "mb_crc.h": "c"
+    },
 }
