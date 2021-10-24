@@ -1,0 +1,2 @@
+add_subdirectory(CLI)
+target_include_directories(PicoBase PUBLIC CLI)

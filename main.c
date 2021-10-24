@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "heartbeat.h"
+#include "cli.h"
 
 /**
  * @brief Initialize all required HW and SW modules.
@@ -20,6 +21,7 @@
 void bsp_init(void){
     stdio_init_all();
     UtHeartBeat_Init(500);
+    UtCli_Init();
 }
 
 /**
@@ -30,12 +32,9 @@ void bsp_init(void){
 int main()
 {
     bsp_init();
-
-    puts("Hello, world!");
-
-    //Mainloop
     while(1){
         UtHeartBeat_Run();
+        UtCli_Run();
     }
 
     return 0;

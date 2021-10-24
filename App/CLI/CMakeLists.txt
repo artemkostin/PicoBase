@@ -1,0 +1,1 @@
+target_sources(PicoBase PUBLIC cli.c)
