@@ -6,12 +6,14 @@ For all detailed descriptions, please refer to Documentation folder.
 **ToDo:** Add description for other SW components.
 
 ## 1. Command Line Interface (CLI)
-In order to be able to set up device properly, it is important to have some direct CLI. In SPG pot it is implemented by text-based, AT command, protocol for the following commands:
- - AT+REBOOT - Reboot the device.
- - AT+INFO [GET|SET] <INFO_ID> <VALUE> - Get or Set device information.
- - AT+PARAM [GET|SET] <PARAM_ID> <VALUE> - Get or Set database value.
- - AT+MODBUS - Switch to a regular operation mode, MODBus server.
- - AT+AUTH - Authentificate session (Not implemented yet).
+In order to be able to set up device properly, it is important to have some direct CLI. In SPG pot it is implemented by text-based, commands, protocol for the following commands:
+ - !help - Show commands description.
+ - !reboot - Reboot the device.
+ - !info - Show device information (RO)
+ - !set - Set <PARAM_ID> <VALUE> to database.
+ - !get - Get <PARAM_ID> from database.
+ - !modbus - Switch to a regular operation mode, MODBus server.
+ - !auth - Authentificate session (Not implemented yet).
 
 ## 2. Regular operation mode: MODBus RTU server
 To make this device compatible with industrial Programmable Logic Controlers (PLC), the MODBus RTU protocol is using.
