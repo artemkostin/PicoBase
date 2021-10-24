@@ -13,6 +13,7 @@
 #include "pico/stdlib.h"
 #include "heartbeat.h"
 #include "cli.h"
+#include "mb_node.h"
 
 /**
  * @brief Initialize all required HW and SW modules.
@@ -22,6 +23,7 @@ void bsp_init(void){
     stdio_init_all();
     UtHeartBeat_Init(500);
     UtCli_Init();
+    AppModBUS_Init(1);
 }
 
 /**
@@ -35,6 +37,7 @@ int main()
     while(1){
         UtHeartBeat_Run();
         UtCli_Run();
+        AppModBUS_Run();
     }
 
     return 0;
