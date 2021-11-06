@@ -4,7 +4,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 # initalize pico_sdk from installed location
 # (note this can come from environment, CMake cache etc)
-set(PICO_SDK_PATH "/home/artem/Personal/pico/pico-sdk")
+set(PICO_SDK_PATH "/home/artem/Projects/pico-sdk")
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 project(PicoBase C CXX ASM)
@@ -33,3 +33,5 @@ pico_enable_stdio_usb(PicoBase 1)
 target_link_libraries(PicoBase pico_stdlib)
 pico_add_extra_outputs(PicoBase)
 
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND arm-none-eabi-size -A "PicoBase.elf")
