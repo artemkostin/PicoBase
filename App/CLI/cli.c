@@ -123,7 +123,7 @@ utcli_cmd_id_t UtCli_ParseInput(char* buffer, int len)
     utcli_cmd_id_t returnValue = CLI_AT_UNKNOWN;
     if(buffer[0] == '!' && (buffer[len - 1] == '\r' ||  buffer[len - 2] == '\r')){
         char command[COMMAND_MAX_SIZE] = {0};
-        int res = sscanf(buffer, "!%s\r", &command);
+        sscanf(buffer, "!%s\r", &command);
         for(int i = 0; i < CLI_AT_TOTAL; i++){
             if(!strncmp((command), cmd_desc[i].name, strlen(command)))
             {

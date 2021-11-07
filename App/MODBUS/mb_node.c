@@ -12,7 +12,7 @@
 #include "mb_node.h"
 
 static uint8_t modbusRxBuffer[MODBUS_BUFFER_SIZE] = {0};
-static uint8_t modbusTxBuffer[MODBUS_BUFFER_SIZE] = {'a'};
+static uint8_t modbusTxBuffer[MODBUS_BUFFER_SIZE] = {0};
 static uint8_t node_address = MODBUS_DEFAULT_INVALID_ADDRESS;
 static mbADUFrame_t frame = {0};
 
