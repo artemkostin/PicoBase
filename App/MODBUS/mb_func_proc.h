@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "mb_crc.h"
+#include "mb_rpi_mapping.h"
 
 #define MODBUS_COILS_COUNT_MIN 0x0001
 #define MODBUS_COILS_COUNT_MAX 0x07D0

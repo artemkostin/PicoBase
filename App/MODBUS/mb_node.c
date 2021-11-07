@@ -143,6 +143,15 @@ void AppModBUS_Init(uint8_t address)
     // Set the GPIO pin mux to the UART - 0 is TX, 1 is RX
     gpio_set_function(0, GPIO_FUNC_UART);
     gpio_set_function(1, GPIO_FUNC_UART);
+
+    //Todo: FIX initialization
+    gpio_init(2);
+    gpio_set_dir(2, GPIO_OUT);
+    gpio_put(2, false);
+
+    gpio_init(3);
+    gpio_set_dir(3, GPIO_OUT);
+    gpio_put(3, false);
     node_address = address;
 };
 

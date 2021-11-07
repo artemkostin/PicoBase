@@ -145,6 +145,7 @@ mbFuncCheckRet_t ModBUSFunc_WriteSingleCoil(uint8_t* buffer_rx, uint16_t data_si
         {
             memcpy(buffer_tx, buffer_rx, data_size_rx);
             *data_size_tx = data_size_rx;
+            return_value = !(mbPicoCoils_Write(coil_address, !(coil_value == 0x0000)));
             printf("MODBUS_FUNC_WRITE_COIL: %s @ %04x\r\n", coil_value == 0x0000 ? "OFF" : "ON", coil_address);
         }
         else
