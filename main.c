@@ -20,10 +20,21 @@
  *
  */
 void bsp_init(void){
+    uint8_t address = 0;
     stdio_init_all();
+    
+    gpio_init(16);
+    gpio_set_dir(16, GPIO_IN);
+    address |= ((gpio_get(16) ? 1 : 0) << 0);
+
+    gpio_init(17);
+    gpio_set_dir(17, GPIO_IN);
+    address |= ((gpio_get(17) ? 1 : 0) << 1);
+
+
     UtHeartBeat_Init(500);
     UtCli_Init();
-    AppModBUS_Init(1);
+    AppModBUS_Init((address + 1));
 }
 
 /**
