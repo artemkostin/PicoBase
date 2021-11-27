@@ -63,7 +63,7 @@ static mbADUResults_t mb_process_adu(uint8_t* buffer, uint16_t len)
             frame.data_size = (uint16_t)(len - (MODBUS_FRAME_DATA_OFFSET + MODBUS_FRAME_CRC_SIZE));
         }
 
-        if(frame.address != node_address)
+        if(frame.address != 0 && frame.address != node_address)
         {
             return_value = MODBUS_ADU_MISMATCH_ADDRESS;
             break;
@@ -148,10 +148,15 @@ void AppModBUS_Init(uint8_t address)
     gpio_init(2);
     gpio_set_dir(2, GPIO_OUT);
     gpio_put(2, false);
+    gpio_set_drive_strength(2, GPIO_DRIVE_STRENGTH_12MA);
 
     gpio_init(3);
     gpio_set_dir(3, GPIO_OUT);
     gpio_put(3, false);
+    gpio_set_drive_strength(3, GPIO_DRIVE_STRENGTH_12MA);
+
+    gpio_init(4);
+    gpio_set_dir(4, GPIO_IN);
     node_address = address;
 };
 
@@ -216,6 +221,11 @@ void AppModBUS_Run(void)
         case MODBUS_STATE_REPLY_NORMAL:
         {
             uint16_t crc = 0;
+            if(frame.address == 0) {
+                puts("No reply to broadcast message");
+                nextState = MODBUS_STATE_IDLE;
+                break;
+            }
             modbusTxBuffer[MODBUS_FRAME_ADDRESS_OFFSET] = frame.address;
             modbusTxBuffer[MODBUS_FRAME_FUNCCODE_OFFSET] = frame.func_code;
             bufferPointer += MODBUS_FRAME_DATA_OFFSET;

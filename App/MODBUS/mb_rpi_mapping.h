@@ -13,25 +13,25 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include "pico/stdlib.h"
 
 typedef enum
 {
-    MODBUD_PICO_GPIO_DI = 0,
+    MODBUS_PICO_GPIO_RESERVED = 0,
+    MODBUD_PICO_GPIO_DI,
     MODBUD_PICO_GPIO_DO,
     MODBUD_PICO_GPIO_AI,
     MODBUD_PICO_GPIO_AO,
     MODBUD_PICO_GPIO_TOTAL
-} mbPicoGpioMode_t;
+}mbPicoGpioMode_t;
 
 typedef struct
 {
-    uint8_t position;
-    bool is_enabled;
     mbPicoGpioMode_t mode;
 } mbPicoGpioDesc_t;
 
 bool mbPicoCoils_Write(uint8_t coil, bool state);
-bool mbPicoCoils_Read(uint8_t coil, bool state);
+uint8_t mbPicoCoils_Read(uint16_t start_coil, uint16_t* amount_left);
 
 #endif

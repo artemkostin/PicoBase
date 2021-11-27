@@ -17,13 +17,20 @@ mbFuncCheckRet_t ModBUSFunc_ReadCoils(uint8_t* buffer_rx, uint16_t data_size_rx,
     mbFuncCheckRet_t return_value = MODBUS_FUNC_CHECK_SUCCESS;
     uint16_t start_address = *(buffer_rx + 1) | (*(buffer_rx) << 8);
     uint16_t coils_count =   *(buffer_rx + 3) | (*(buffer_rx + 2) << 8);
+    uint16_t coils_count_cp = coils_count;
     if(MODBUS_COILS_COUNT_MIN <= coils_count && coils_count <= MODBUS_COILS_COUNT_MAX)
     {
         if(start_address >= 0x0000 && ((start_address + coils_count) <= 0xFFFF))
         {
             uint16_t byte_count = (uint16_t)((coils_count + 7) / 8);
             *(buffer_tx) = byte_count;
-            memset((void*)(buffer_tx + 1), 0x00, byte_count);
+            for(uint16_t i = 0; i < byte_count; i++) {
+                uint8_t bits_value = mbPicoCoils_Read(start_address, &coils_count_cp);
+                *(buffer_tx + 1 + i) = bits_value;
+                printf("MODBUS_FUNC_READ_COILS: %02x, left: %02x\r\n", bits_value, coils_count_cp);
+            }
+            
+            // memset((void*)(buffer_tx + 1), 0x00, byte_count);
             *data_size_tx = byte_count + 1;
             printf("MODBUS_FUNC_READ_COILS: %04x @ %04x\r\n", coils_count, start_address);
         }
@@ -160,7 +167,7 @@ mbFuncCheckRet_t ModBUSFunc_WriteSingleCoil(uint8_t* buffer_rx, uint16_t data_si
         *data_size_tx = 0;
         return_value = MODBUS_FUNC_CHECK_INVALID_QUANTITY;
     }
-    printf("MODBUS_FUNC_WRITE_COIL: Exit with: %02d\r\n");
+    printf("MODBUS_FUNC_WRITE_COIL: Exit with: %02d\r\n", return_value);
     return return_value;
 }
 
