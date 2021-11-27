@@ -157,6 +157,7 @@ void AppModBUS_Init(uint8_t address)
 
     gpio_init(4);
     gpio_set_dir(4, GPIO_IN);
+    gpio_set_pulls(4, true, false);
     node_address = address;
 };
 

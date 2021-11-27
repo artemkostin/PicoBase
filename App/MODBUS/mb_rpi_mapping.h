@@ -33,5 +33,6 @@ typedef struct
 
 bool mbPicoCoils_Write(uint8_t coil, bool state);
 uint8_t mbPicoCoils_Read(uint16_t start_coil, uint16_t* amount_left);
+uint8_t mbPicoInputs_Read(uint16_t start_coil, uint16_t* amount_left);
 
 #endif
