@@ -22,6 +22,9 @@
       "stdio.h": "c",
       "string.h": "c",
       "printf.h": "c",
-      "mb_crc.h": "c"
+      "mb_crc.h": "c",
+      "heartbeat.h": "c",
+      "mb_rpi_mapping.h": "c",
+      "mb_func_proc.h": "c"
     },
 }
