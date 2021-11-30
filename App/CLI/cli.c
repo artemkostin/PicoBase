@@ -15,6 +15,7 @@ static char command_buffer[COMMAND_BUFFER_MAX_SIZE] = {0};
 static const utcli_cmd_description_t cmd_desc[CLI_AT_TOTAL] = {
     {.id = CLI_AT_UNKNOWN,    .name = "help",   .description = "Show this text"},
     {.id = CLI_AT_REBOOT,     .name = "reboot", .description = "Restart the board"},
+    {.id = CLI_AT_BOOTLOADER, .name = "boot",   .description = "Reboot to usb bootloader"},
     {.id = CLI_AT_INFO,       .name = "info",   .description = "Show device info"},
     {.id = CLI_AT_PARAMS_SET, .name = "set",    .description = "Set DB parameter"},
     {.id = CLI_AT_PARAMS_GET, .name = "get",    .description = "Get DB parameter"},
@@ -34,6 +35,13 @@ static utcli_result_t cli_at_reboot_handler(char* buffer, uint16_t len)
 {
     watchdog_enable(500, 0);
     printf("Waiting to be rebooted by watchdog\n");
+    return CLI_RESULT_SUCESS;
+}
+static utcli_result_t cli_at_bootloader_handler(char* buffer, uint16_t len)
+{
+    reset_usb_boot((1 << PICO_DEFAULT_LED_PIN), 0);
+    printf("Reboot to usb bootloader\n");
+    sleep_ms(500);
     return CLI_RESULT_SUCESS;
 }
 static utcli_result_t cli_at_info_handler(char* buffer, uint16_t len)
@@ -73,6 +81,7 @@ static utcli_result_t cli_at_auth_handler(char* buffer, uint16_t len)
 static handler_function cli_callbacks[CLI_AT_TOTAL] = {
     &cli_at_help_handler,
     &cli_at_reboot_handler,
+    &cli_at_bootloader_handler,
     &cli_at_info_handler,
     &cli_at_param_set_handler,
     &cli_at_param_get_handler,

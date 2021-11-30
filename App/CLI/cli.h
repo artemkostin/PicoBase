@@ -18,6 +18,7 @@
 #include "pico/stdio.h"
 #include "hardware/watchdog.h"
 #include "devinfo.h"
+#include "pico/bootrom.h"
 
 #define COMMAND_BUFFER_MAX_SIZE 256
 #define COMMAND_MAX_SIZE 32
@@ -31,6 +32,7 @@ typedef enum {
 typedef enum {
     CLI_AT_UNKNOWN = 0x0000,
     CLI_AT_REBOOT,
+    CLI_AT_BOOTLOADER,
     CLI_AT_INFO,
     CLI_AT_PARAMS_SET,
     CLI_AT_PARAMS_GET,
